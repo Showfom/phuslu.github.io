@@ -12,6 +12,7 @@ done
 
 find . -type f -name "index.html" -exec git add "{}" \;
 
-git commit -m "[skip ci] build new index" -s
+git commit -m "[skip ci] build new index" -s || true
+
 git push origin master
 
