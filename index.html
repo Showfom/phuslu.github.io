@@ -1,12 +1,12 @@
 <html><head><title>Index of /</title></head><body><pre>
-<a href="candidate/">candidate/</a>	8-Jul 13:03 4.0K
-<a href="css/">css/</a>	8-Jul 13:03 4.0K
-<a href="fonts/">fonts/</a>	8-Jul 13:03 4.0K
-<a href="wallpapers/">wallpapers/</a>	8-Jul 13:03 4.0K
-<a href="soft/">soft/</a>	8-Jul 13:04 4.0K
-<a href="topic/">topic/</a>	8-Jul 13:05 4.0K
-<a href="goproxy/">goproxy/</a>	8-Jul 13:45 4.0K
-<a href="autoindex.html">autoindex.html</a>	8-Jul 12:12 11K
+<a href="candidate/">candidate/</a>	8-Jul 15:40 4.0K
+<a href="css/">css/</a>	8-Jul 15:40 4.0K
+<a href="fonts/">fonts/</a>	8-Jul 15:40 4.0K
+<a href="goproxy/">goproxy/</a>	8-Jul 15:40 4.0K
+<a href="soft/">soft/</a>	8-Jul 15:40 4.0K
+<a href="topic/">topic/</a>	8-Jul 15:40 4.0K
+<a href="wallpapers/">wallpapers/</a>	8-Jul 15:40 4.0K
+<a href="autoindex.html">autoindex.html</a>	8-Jul 20:20 11K
 <a href="ublock.txt">ublock.txt</a>	10-May 19:46 135
 <a href="cmdhere.cmd">cmdhere.cmd</a>	10-May 19:46 2.1K
 <a href="bashrc">bashrc</a>	15-May 22:21 2.4K
@@ -17,16 +17,12 @@
 <a href="nginx.conf">nginx.conf</a>	7-Jul 20:55 6.9K
 <a href="bb.py">bb.py</a>	27-Jun 16:30 11K
 </pre></body></html>
-<!-- autoindex for nginx, see https://phuslu.github.io/ -->
+<!-- autoindex for nginx, see /autoindex.html -->
 <script type="text/javascript">
 !function(){
   if (!document.head) {
     return;
   }
-
-  var webkit = /WebKit/.test(navigator.userAgent);
-  var bodylines = document.body.innerHTML.split('\n');
-  document.body.innerHTML = '';
 
   meta = document.createElement('meta');
   meta.setAttribute('charset', 'utf-8');
@@ -35,6 +31,26 @@
   meta.setAttribute('name', 'viewport');
   meta.setAttribute('content', 'width=device-width,initial-scale=1');
   document.head.appendChild(meta);
+
+  if (!document.body) {
+    s = "";
+    s += "<div class=\"container\"><h3>Usage:</h3><pre>\n";
+    s += "# download autoindex.html to /wwwroot\n";
+    s += "location ~ ^(.*)/$ {\n";
+    s += "    autoindex       on;\n";
+    s += "    autoindex_localtime on;\n";
+    s += "    autoindex_exact_size off;\n";
+    s += "    add_after_body /autoindex.html;\n";
+    s += "}\n";
+    s += "</pre></div>\n";
+    document.write(s);
+    return;
+  }
+
+  var webkit = /WebKit/.test(navigator.userAgent);
+  var bodylines = document.body.innerHTML.split('\n');
+  document.body.innerHTML = '';
+
 
   div = document.createElement('div');
   div.setAttribute('class', 'container');
@@ -109,7 +125,7 @@
     div.appendChild(link);
 
     table3 = document.createElement('table');
-    table3.setAttribute('class', 'table table-striped table-bordered table-hover table-condensed');
+    table3.setAttribute('class', 'table table-striped table-bordered table-condensed');
     tbody3 = document.createElement('tbody');
     tr = document.createElement('tr');
     th = document.createElement('th');
