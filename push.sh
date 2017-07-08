@@ -2,11 +2,16 @@
 
 set -ex
 
-ls -phl | awk 'NR>1' | grep -v -w 'index.html' | grep -v -w 'push.sh' | sort -k1 -k2 | awk 'BEGIN{print "<html><head><title>Index of /</title></head><body><pre>"} {printf("<a href=\"%s\">%s</a>\t%s-%s %s %s\n", $9, $9, $7, $6, $8, $5)} END{print "</pre></body></html>"}' >index.html 
+AUTOINDEX_HTML=$(pwd -P)/autoindex.html
+for DIR in $(ls -l | grep '^d' | awk '{print $NF}'); do
+    pushd ${DIR}
+    ls -phl | awk 'NR>1' | grep -v -w 'index.html' | grep -v -w 'push.sh' | sort -k1 -k2 | awk 'BEGIN{print "<html><head><title>Index of /</title></head><body><pre>"} {printf("<a href=\"%s\">%s</a>\t%s-%s %s %s\n", $9, $9, $7, $6, $8, $5)} END{print "</pre></body></html>"}' >index.html 
+    cat ${AUTOINDEX_HTML} >>index.html
+    popd
+done
 
-cat autoindex.html >>index.html
+find . -type f -name "index.html" -exec git add "{}" \;
 
-git add index.html
 git commit -m "[skip ci] build new index" -s
 git push origin master
 
