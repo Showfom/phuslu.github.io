@@ -15,10 +15,6 @@
     return;
   }
 
-  var webkit = /WebKit/.test(navigator.userAgent);
-  var bodylines = document.body.innerHTML.split('\n');
-  document.body.innerHTML = '';
-
   meta = document.createElement('meta');
   meta.setAttribute('charset', 'utf-8');
   document.head.appendChild(meta);
@@ -26,6 +22,26 @@
   meta.setAttribute('name', 'viewport');
   meta.setAttribute('content', 'width=device-width,initial-scale=1');
   document.head.appendChild(meta);
+
+  if (!document.body) {
+    s = "";
+    s += "<div class=\"container\"><pre>\n";
+    s += "# download https://phuslu.github.io/autoindex.html to wwwroot\n";
+    s += "location ~ ^(.*)/$ {\n";
+    s += "    autoindex       on;\n";
+    s += "    autoindex_localtime on;\n";
+    s += "    autoindex_exact_size off;\n";
+    s += "    add_after_body /autoindex.html;\n";
+    s += "}\n";
+    s += "</pre></div>\n";
+    document.write(s);
+    return;
+  }
+
+  var webkit = /WebKit/.test(navigator.userAgent);
+  var bodylines = document.body.innerHTML.split('\n');
+  document.body.innerHTML = '';
+
 
   div = document.createElement('div');
   div.setAttribute('class', 'container');
