@@ -1,0 +1,16 @@
+dist: trusty
+sudo: false
+
+language: bash
+
+script:
+  - bash .travis/build.sh
+
+branches:
+  only:
+    - master
+
+addons:
+  apt:
+    packages:
+      - p7zip-full
