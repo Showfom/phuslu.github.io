@@ -3,7 +3,7 @@
 if (isset($_FILES['photo']) && !$_FILES['photo']['error'])
 {
   $filename = $_FILES['photo']['name'];
-  if (preg_match('/\.(php|url)$/', $filename))
+  if (preg_match('/\.(php|cgi)$/', $filename))
   {
     $filename .= '.txt';
   }
@@ -29,7 +29,7 @@ if (isset($_FILES['photo']) && !$_FILES['photo']['error'])
 	<style type="text/css" media="screen">
 		*{
 			margin:0;padding:0;
-			font-family:arial, sans-serif;
+			font-family: Tahoma, "Microsoft Yahei", Arial, Serif;
 			color:#222;
 		}
 		html,body{
@@ -124,7 +124,7 @@ if (isset($_FILES['photo']) && !$_FILES['photo']['error'])
 <body>
 	<div id="drag">
 		<div id="drag-text">
-			拖拽文件到此处
+			请拖拽文件或在空白处双击~
 		</div>
 		<input type="file" id="drag-fileElement" />
 	</div>
@@ -166,14 +166,6 @@ if (isset($_FILES['photo']) && !$_FILES['photo']['error'])
 		}
 		if(!file && !text){
 			alert('文件不存在,请重试');
-			return false;
-		}
-		if(file && file.type.indexOf('image') === -1){
-			alert('文件不是图片格式,请重试');
-			return false;
-		}
-		if(text && !/^http/i.test(text)){
-			alert('图片地址必须http打头');
 			return false;
 		}
 
