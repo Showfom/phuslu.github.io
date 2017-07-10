@@ -613,7 +613,7 @@ if($sysInfo['swapTotal']>0)
 
 </div>
 
-<link href="<?php echo BOOTSTRAP_CSS_URL; ?>" rel="stylesheet">
+<link href="<?php echo BOOTSTRAP_CSS_URL; ?>" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
 <style>
 <!--
 .table-condensed>thead>tr>th,
