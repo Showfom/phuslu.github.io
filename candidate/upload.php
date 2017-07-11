@@ -51,6 +51,7 @@ html,body {
 	text-align:center;
 	font-size:20px;
 	color:#999;
+	cursor:pointer;
 }
 #drag-file{
 	position: absolute;
@@ -130,24 +131,25 @@ document.getElementById('drag-file').addEventListener('change', function() {
 	var data = new FormData();
 	data.append('photo', files[0]);
 
-	var request = new XMLHttpRequest();
-	request.open("POST", location.href);
-	request.upload.addEventListener('progress', function(evt) {
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", location.href);
+	xhr.upload.addEventListener('progress', function(evt) {
 	    if (evt.lengthComputable) {
                 var percent = evt.loaded / evt.total * 100;
                 document.getElementById('drag-text').innerHTML = Math.ceil(percent) + '%';
             }
         }, false);
-	request.onreadystatechange = function(){
-		if(request.readyState == 4 && request.status == 200){
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status == 200){
 			document.getElementById('drag-text').innerHTML = '';
 			document.getElementById('rs').style.display = 'block';
-			document.getElementById('rs-img').src = request.responseText;
-			document.getElementById('rs-text').value = request.responseText;
+			document.getElementById('rs-img').src = xhr.responseText;
+			document.getElementById('rs-text').value = xhr.responseText;
 		}
 	}
-	request.send(data);
+	xhr.send(data);
 	document.getElementById('drag-text').innerHTML = '文件上传中...';
+	document.getElementById('drag-file').disabled = true;
 }, false);
 </script>
 
