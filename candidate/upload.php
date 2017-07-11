@@ -20,9 +20,10 @@ if (isset($_FILES['photo']) && !$_FILES['photo']['error'])
 }
 
 ?>
-
 <!DOCTYPE HTML>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
 <title>文件上传</title>
 <style type="text/css" media="screen">
 * {
