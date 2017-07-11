@@ -131,6 +131,12 @@ document.getElementById('drag-file').addEventListener('change', function() {
 
 	var request = new XMLHttpRequest();
 	request.open("POST", location.href);
+	request.upload.addEventListener('progress', function(evt) {
+	    if (evt.lengthComputable) {
+                var percent = evt.loaded / evt.total * 100;
+                document.getElementById('drag-text').innerHTML = Math.ceil(percent) + '%';
+            }
+        }, false);
 	request.onreadystatechange = function(){
 		if(request.readyState == 4 && request.status == 200){
 			document.getElementById('drag-text').innerHTML = '';
