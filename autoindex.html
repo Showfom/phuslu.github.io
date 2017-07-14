@@ -1,17 +1,11 @@
 <!-- autoindex for nginx, powered by 3f71df908a3be96b -->
 <script type="text/javascript">
 !function(){
-  var h = document.head
-  var b = document.body
-  var c = function (name) {
-    return document.createElement(name);
-  }
-  var s = function (obj, key, value) {
-    return (obj.setAttribute).call(obj, key, value);
-  }
-  var a = function (obj, child) {
-    return (obj.appendChild).call(obj, child);
-  }
+  var h = document.head;
+  var b = document.body;
+  var c = function (name) { return document.createElement(name); };
+  var s = function (obj, key, value) { return (obj.setAttribute).call(obj, key, value); };
+  var a = function (obj, child) { return (obj.appendChild).call(obj, child); };
 
   if (!h) {
     return;
@@ -173,7 +167,7 @@
     xhr.open('GET', location.pathname+readme, true);
     xhr.onload = function() {
       if (xhr.status >= 200 && xhr.status < 400) {
-        whenAvailable = function (name, callback) {
+        wait = function (name, callback) {
             var interval = 10; // ms
             window.setTimeout(function() {
                 if (window[name]) {
@@ -183,7 +177,7 @@
                 }
             }, interval);
         };
-        whenAvailable('marked', function() {
+        wait('marked', function() {
           document.getElementById("readme").innerHTML = marked(xhr.responseText);
         });
       }
