@@ -109,12 +109,20 @@
     datetime = m[3] + ' ' + m[4];
     size = m[5];
 
-    if (filename.toLowerCase() == 'readme.md') readme = filename;
-    if (/\/$/.test(displayname)) cssclass = 'octicon file-directory';
-    if (/\.(zip|7z|bz2|gz|tar|tgz|tbz2|cab)$/.test(displayname)) cssclass = 'octicon file-zip';
-    if (/\.(jpg|png|bmp|gif|ico|webp|flv|mp4|mkv|avi|mkv)$/.test(displayname)) cssclass = 'octicon file-media';
+    if (filename.toLowerCase() == 'readme.md') {
+      readme = filename;
+    }
 
-    insert(filename, displayname.replace(/\/$/, ''), cssclass, datetime, size);
+    if (/\/$/.test(displayname)) {
+      cssclass = 'octicon file-directory';
+      displayname = displayname.replace(/\/$/, '');
+    } else if (/\.(zip|7z|bz2|gz|tar|tgz|tbz2|cab)$/.test(displayname)) {
+      cssclass = 'octicon file-zip';
+    } else if (/\.(jpg|png|bmp|gif|ico|webp|flv|mp4|mkv|avi|mkv)$/.test(displayname)) {
+      cssclass = 'octicon file-media';
+    }
+
+    insert(filename, displayname, cssclass, datetime, size);
   }
 
   document.body.appendChild(div)
@@ -141,7 +149,10 @@
     tr = document.createElement('tr');
     th = document.createElement('th');
     th.setAttribute('colspan', '3');
-    th.innerText = readme;
+    span = document.createElement('span');
+    span.setAttribute('class', 'octicon file');
+    span.innerText = readme;
+    th.appendChild(span);
     tr.appendChild(th);
     tbody3.appendChild(tr)
     tr = document.createElement('tr');
