@@ -362,7 +362,7 @@ if ($_GET['act'] == "iploc")
 
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_URL, "https://www.ipip.net/ip.html");
-  curl_setopt($ch, CURLOPT_REFERER, "https://www.ipip.net/ip.html");
+  curl_setopt($ch, CURLOPT_REFERER, "https://www.ipip.net/");
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($ch, CURLOPT_USERAGENT, "curl/7.47.0");
   curl_setopt($ch, CURLOPT_POST, 1);
