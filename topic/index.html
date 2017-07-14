@@ -5,21 +5,27 @@
 <!-- autoindex for nginx, powered by 3f71df908a3be96b -->
 <script type="text/javascript">
 !function(){
-  if (!document.head) {
+  var h = document.head;
+  var b = document.body;
+  var c = function (name) { return document.createElement(name); };
+  var s = function (obj, key, value) { return (obj.setAttribute).call(obj, key, value); };
+  var a = function (obj, child) { return (obj.appendChild).call(obj, child); };
+
+  if (!h) {
     return;
   }
 
   // <meta charset="utf-8">
-  meta = document.createElement('meta');
-  meta.setAttribute('charset', 'utf-8');
-  document.head.appendChild(meta);
+  m = c('meta');
+  s(m, 'charset', 'utf-8');
+  a(h, m);
   // <meta name="viewport" content="width=device-width, initial-scale=1">
-  meta = document.createElement('meta');
-  meta.setAttribute('name', 'viewport');
-  meta.setAttribute('content', 'width=device-width,initial-scale=1');
-  document.head.appendChild(meta);
+  m = c('meta');
+  s(m, 'name', 'viewport');
+  s(m, 'content', 'width=device-width,initial-scale=1');
+  a(h, m);
 
-  if (!document.body) {
+  if (!b) {
     s = "<div class=\"container\">\n";
     s += "<h3>nginx.conf</h3>\n";
     s += "<pre>\n";
@@ -36,34 +42,34 @@
     return;
   }
 
-  var bodylines = document.body.innerHTML.split('\n');
-  document.body.innerHTML = '';
+  var bodylines = b.innerHTML.split('\n');
+  b.innerHTML = '';
 
   // <div class="container">
-  div = document.createElement('div');
-  div.setAttribute('class', 'container');
+  div = c('div');
+  s(div, 'class', 'container');
   // <table class="table table-striped table-bordered table-hover table-condensed">
   //   <tbody><tr><th colspan="3">Index of /</th></tr></tbody>
   // </table>
-  table1 = document.createElement('table');
-  table1.setAttribute('class', 'table table-striped table-bordered table-hover table-condensed');
-  tbody1 = document.createElement('tbody');
-  tr = document.createElement('tr');
-  th = document.createElement('th');
-  th.setAttribute('colspan', '3');
+  table1 = c('table');
+  s(table1, 'class', 'table table-striped table-bordered table-hover table-condensed');
+  tbody1 = c('tbody');
+  tr = c('tr');
+  th = c('th');
+  s(th, 'colspan', '3');
   th.innerText = document.getElementsByTagName('title')[0].innerText;
-  tr.appendChild(th);
-  tbody1.appendChild(tr);
-  table1.appendChild(tbody1);
-  div.appendChild(table1);
+  a(tr, th);
+  a(tbody1, tr);
+  a(table1, tbody1);
+  a(div, table1);
   // <table class="table table-striped table-bordered table-hover table-condensed">
   //   <tbody></tbody>
   // </table>
-  table2 = document.createElement('table');
-  table2.setAttribute('class', 'table table-striped table-bordered table-hover table-condensed');
-  tbody2 = document.createElement('tbody');
-  table2.appendChild(tbody2);
-  div.appendChild(table2);
+  table2 = c('table');
+  s(table2, 'class', 'table table-striped table-bordered table-hover table-condensed');
+  tbody2 = c('tbody');
+  a(table2, tbody2);
+  a(div, table2);
 
   var webkit = /WebKit/.test(navigator.userAgent);
   var insert = function(filename, displayname, cssclass, datetime, size) {
@@ -71,22 +77,22 @@
     //   <td><a href="name" class="octicon file">name</a></td><td>datetime</td><td>size</td>
     // </tr>
     if (!webkit) cssclass += '-png';
-    tr = document.createElement('tr');
-    tr.setAttribute('class', 'table table-striped table-bordered table-hover table-condensed');
-    td = document.createElement('td');
-    a = document.createElement('a');
-    a.setAttribute('href', filename);
-    a.setAttribute('class', cssclass);
-    a.innerText = displayname;
-    td.appendChild(a);
-    tr.appendChild(td);
-    td = document.createElement('td');
+    tr = c('tr');
+    s(tr, 'class', 'table table-striped table-bordered table-hover table-condensed');
+    td = c('td');
+    a1 = c('a');
+    s(a1, 'href', filename);
+    s(a1, 'class', cssclass);
+    a1.innerText = displayname;
+    a(td, a1);
+    a(tr, td);
+    td = c('td');
     td.innerText = datetime;
-    tr.appendChild(td);
-    td = document.createElement('td');
+    a(tr, td);
+    td = c('td');
     td.innerText = size;
-    tr.appendChild(td);
-    tbody2.appendChild(tr);
+    a(tr, td);
+    a(tbody2, tr);
   };
 
   var readme = '';
@@ -119,7 +125,7 @@
     insert(filename, displayname, cssclass, datetime, size);
   }
 
-  document.body.appendChild(div)
+  a(b, div)
 
   if (readme != '') {
     // <table class="table table-striped table-bordered table-condensed">
@@ -128,44 +134,44 @@
     //     <tr><td colspan="3"><div id="readme" class="markdown-body"></div></td></tr>
     //   </tbody>
     // </table>
-    script = document.createElement('script');
-    script.setAttribute('src', 'https://cdn.bootcss.com/marked/0.3.6/marked.min.js');
-    div.appendChild(script);
+    script = c('script');
+    s(script, 'src', 'https://cdn.bootcss.com/marked/0.3.6/marked.min.js');
+    a(div, script);
 
-    link = document.createElement('link');
-    link.setAttribute('href', 'https://cdn.bootcss.com/github-markdown-css/2.6.0/github-markdown.min.css');
-    link.setAttribute('rel', 'stylesheet');
-    div.appendChild(link);
+    link = c('link');
+    s(link, 'href', 'https://cdn.bootcss.com/github-markdown-css/2.6.0/github-markdown.min.css');
+    s(link, 'rel', 'stylesheet');
+    a(div, link);
 
-    table3 = document.createElement('table');
-    table3.setAttribute('class', 'table table-striped table-bordered table-condensed');
-    tbody3 = document.createElement('tbody');
-    tr = document.createElement('tr');
-    th = document.createElement('th');
-    th.setAttribute('colspan', '3');
-    span = document.createElement('span');
-    span.setAttribute('class', 'octicon file');
+    table3 = c('table');
+    s(table3, 'class', 'table table-striped table-bordered table-condensed');
+    tbody3 = c('tbody');
+    tr = c('tr');
+    th = c('th');
+    s(th, 'colspan', '3');
+    span = c('span');
+    s(span, 'class', 'octicon file');
     span.innerText = readme;
-    th.appendChild(span);
-    tr.appendChild(th);
-    tbody3.appendChild(tr)
-    tr = document.createElement('tr');
-    td = document.createElement('td');
-    td.setAttribute('colspan', '3');
-    tdiv = document.createElement('div');
-    tdiv.setAttribute('id', 'readme');
-    tdiv.setAttribute('class', 'markdown-body');
-    td.appendChild(tdiv);
-    tr.appendChild(td);
-    tbody3.appendChild(tr)
-    table3.appendChild(tbody3);
-    div.appendChild(table3);
+    a(th, span);
+    a(tr, th);
+    a(tbody3, tr)
+    tr = c('tr');
+    td = c('td');
+    s(td, 'colspan', '3');
+    tdiv = c('div');
+    s(tdiv, 'id', 'readme');
+    s(tdiv, 'class', 'markdown-body');
+    a(td, tdiv);
+    a(tr, td);
+    a(tbody3, tr)
+    a(table3, tbody3);
+    a(div, table3);
 
     var xhr = new XMLHttpRequest();
     xhr.open('GET', location.pathname+readme, true);
     xhr.onload = function() {
       if (xhr.status >= 200 && xhr.status < 400) {
-        whenAvailable = function (name, callback) {
+        wait = function (name, callback) {
             var interval = 10; // ms
             window.setTimeout(function() {
                 if (window[name]) {
@@ -175,7 +181,7 @@
                 }
             }, interval);
         };
-        whenAvailable('marked', function() {
+        wait('marked', function() {
           document.getElementById("readme").innerHTML = marked(xhr.responseText);
         });
       }
